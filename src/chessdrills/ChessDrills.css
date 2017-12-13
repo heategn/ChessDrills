@@ -1,0 +1,57 @@
+#info-box{
+    -fx-padding: 20px;
+}
+
+#license{
+    -fx-background-color:white;
+    -fx-padding: 20px;
+}
+
+#main_pane{
+    -fx-background-color: black; 
+    -fx-background-image: url(assets/background-image.jpg);
+    -fx-background-size: cover; 
+    -fx-background-position: bottom;
+}
+
+.game_btn{
+    -fx-background-color: #cfd8dc;
+    -fx-background-color: #eeeeee;
+    -fx-color: #eceff1;
+    -fx-border-radius: 3;
+    -fx-border-width: 2;
+}
+
+.game_btn:hover{
+    -fx-background-color: #b0bec5;
+}
+
+.game-btn:pressed{
+    -fx-background-color: blue;
+}
+
+#quit_btn:hover,
+#about_btn:hover{
+    -fx-background-color: #78909c;
+}
+
+#game-menu-content{
+    -fx-font-color: #37474f;
+    -fx-background-color: #b0bec5;
+    -fx-border-color: #546e7a;
+    -fx-border-radius: 3;
+    -fx-radius: 3;
+    -fx-background-radius: 3;
+    -fx-stroke-width: 1; 
+    -fx-padding: 10px;
+}
+
+#flash-text{
+    -fx-font-size: 42px; 
+    /*-fx-fill: #90a4ae;*/ 
+    -fx-fill: #e0e0e0;
+    -fx-stroke: #757575;
+    -fx-stroke-width: 2px;
+    -fx-font-weight: bold; 
+    -fx-font-smoothing-type: lcd;
+}
