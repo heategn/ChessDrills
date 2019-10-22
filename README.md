@@ -1,3 +1,4 @@
+
 ChessDrills is a suite of drills designed to improve your chess. It currently features one game, called "Invisible Pairs", which is a clone of an old DOS game called "Dynamic Pairs" (if I remember correctly) that I can't find online anymore. 
 
 Other games I plan to add are inspired by drills found in the ChessMaster series. If you have an idea for a game feel free to add a feature/pull request.
@@ -24,7 +25,7 @@ The project was created in NetBeans 8.1. Requires Java 8/OpenJDK 8 and JavaFx/Op
 
 To build from the command-line:
  
-`ant -f /home/cyclist2/projects/testbuild/ChessDrills -Dnb.internal.action.name=build jar`
+`ant -f [PROJECT_ROOT]/ChessDrills -Dnb.internal.action.name=build jar`
 
 # Known Issues
 
