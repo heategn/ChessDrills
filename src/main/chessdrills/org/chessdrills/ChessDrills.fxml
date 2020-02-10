@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Text?>
+<?import org.chessdrills.menus.StartGameMenu ?>
+
+<AnchorPane fx:id="main_pane" prefHeight="768.0" maxWidth="1024.0" maxHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chessdrills.ChessDrillsController">
+   <children>
+      <GridPane fx:id="main_grid" hgap="15.0" layoutX="14.0" layoutY="14.0" >
+        <columnConstraints>
+          <ColumnConstraints fillWidth="true" percentWidth="20.0"/>
+          <ColumnConstraints percentWidth="80.0"  />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fx:id="canvas_row_cell" valignment="TOP" fillHeight="100" percentHeight="100.0" vgrow="ALWAYS" />
+        </rowConstraints>
+        <children>
+            <VBox fx:id="side_nav" prefHeight="768.0" spacing="10.0" GridPane.valignment="TOP" >
+               <children>
+                  <Button styleClass="game_btn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#invisible_pairs_clicked" text="Invisible Pairs" />
+                  <Button styleClass="game_btn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#quick_capture_clicked" text="Quick Capture" />
+                  <AnchorPane prefHeight="768.0" prefWidth="1024.0">
+                    <children>
+                      <StackPane prefHeight="768.0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+                        <children>
+                            <VBox fx:id="game_info"/>
+                        </children>
+                      </StackPane>
+                    </children>
+                  </AnchorPane>
+                  <GridPane GridPane.hgrow="ALWAYS" hgap="15" maxWidth="1.7976931348623157E308">
+                      <columnConstraints>
+                          <ColumnConstraints fillWidth="true" percentWidth="90.0"/>
+                          <ColumnConstraints  percentWidth="20.0"/>
+                      </columnConstraints>
+                      <children>
+                        <Button styleClass="game_btn" GridPane.columnIndex="0" fx:id="quit_btn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#quit_clicked" />
+                        <Button styleClass="game_btn" GridPane.columnIndex="1" fx:id="about_btn" onMouseClicked="#about_clicked" text="?" />
+                      </children>
+                  </GridPane>
+               </children>
+            </VBox>
+        </children>
+      </GridPane>
+      <StartGameMenu fx:id="gameMenu" visible="false" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" /> 
+   </children>
+</AnchorPane>

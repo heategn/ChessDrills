@@ -1,53 +1,110 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><project name="ChessDrills" default="default" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
-    <description>Builds, tests, and runs the project ChessDrills.</description>
-    <import file="nbproject/build-impl.xml"/>
-    <!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ChessDrills" default="build" basedir="." >
+	<property name="src" location="src/main" />
+	<property name="src_test" location="src/test" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="chessdrills_package_name" value="chessdrills"/>
+	<property name="chessdrills_fxml" value="${chessdrills_package_name}/org/chessdrills/ChessDrills.fxml"/>
+	<property name="chessdrills_css" value="${chessdrills_package_name}/org/chessdrills/ChessDrills.css"/>
+	<property name="chessdrills_xmls_ba" value="${chessdrills_package_name}/org/chessdrills/ChessDrills.xmls.ba"/>
+	<property name="chessdrills_assets_dir" value="${chessdrills_package_name}/org/chessdrills/assets"/>
+	<property name="javafx" value="javafx-sdk-13/lib"/>
 
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. Those of them relevant for JavaFX project are: 
+	<!-- 
+		The jmods directory is used in deploy.sh during jlink. Keeping these here for reference 
+		<property name="javafx-jmods" value="javafx-jmods-11"/>
+		<property name="javafx-jmods-windows" value="javafx-jmods-11-windows"/>
+	-->
 
-      -pre-init:                 called before initialization of project properties
-      -post-init:                called after initialization of project properties
-      -pre-compile:              called before javac compilation
-      -post-compile:             called after javac compilation
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-jfx-jar:              called before FX SDK specific <fx:jar> task
-      -post-jfx-jar:             called after FX SDK specific <fx:jar> task
-      -pre-jfx-deploy:           called before FX SDK specific <fx:deploy> task
-      -post-jfx-deploy:          called after FX SDK specific <fx:deploy> task
-      -pre-jfx-native:           called just after -pre-jfx-deploy if <fx:deploy> runs in native packaging mode
-      -post-jfx-native:          called just after -post-jfx-deploy if <fx:deploy> runs in native packaging mode
-      -post-clean:               called after cleaning build products
+	<property name="sdk-windows-jmods" value="windows_jdk_11/jdk-11.0.4+11/jmods"/>
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${build}" />
+	</target>
 
-    (Targets beginning with '-' are not intended to be called on their own.)
+	<target name="build" depends="init">
+		<mkdir dir="${build}/${chessdrills_package_name}/org/chessdrills/assets" />
+		<javac destdir="${build}" modulesourcepath="${src}" modulepath="${javafx}:${src_test}" includeantruntime="true" />	
+		<copy file="${src}/${chessdrills_fxml}" tofile="${build}/${chessdrills_fxml}" />
+		<copy file="${src}/${chessdrills_css}" tofile="${build}/${chessdrills_css}" />
+		<copy file="${src}/${chessdrills_xmls_ba}" tofile="${build}/${chessdrills_xmls_ba}" />
+		<copy todir="${build}/${chessdrills_assets_dir}" >
+			<fileset dir="${src}/${chessdrills_assets_dir}" />
+		</copy>
+	</target>
 
-    Example of inserting a HTML postprocessor after javaFX SDK deployment:
+	<target name="dist" depends="build">
+		<mkdir dir="${dist}" />
+		<jar destfile="${dist}/${chessdrills_package_name}.jar" basedir="${build}/${chessdrills_package_name}">
+			<manifest>
+				<attribute name="Main-Class" value="org.chessdrills.ChessDrills"/>
+			</manifest>	
+		</jar>
+	</target>
 
-        <target name="-post-jfx-deploy">
-            <basename property="jfx.deployment.base" file="${jfx.deployment.jar}" suffix=".jar"/>
-            <property name="jfx.deployment.html" location="${jfx.deployment.dir}${file.separator}${jfx.deployment.base}.html"/>
-            <custompostprocess>
-                <fileset dir="${jfx.deployment.html}"/>
-            </custompostprocess>
-        </target>
+	<target name="testbuild">
+		<javac destdir="build" modulesourcepath="${src_test}" modulepath="${build}/chessdrills:${javafx}:lib-test" includeantruntime="true" />
+	</target>	
 
-    Example of calling an Ant task from JavaFX SDK. Note that access to JavaFX SDK Ant tasks must be
-    initialized; to ensure this is done add the dependence on -check-jfx-sdk-version target:
+	<property name="testname" value="org.chessdrills_test.ChessDrillsTest"/>
+	<property name="logfile" value="test_log/TEST-${testname}.txt"/>
 
-        <target name="-post-jfx-jar" depends="-check-jfx-sdk-version">
-            <echo message="Calling jar task from JavaFX SDK"/>
-            <fx:jar ...>
-                ...
-            </fx:jar>
-        </target>
+	<target name="testconsole" depends="build,testbuild">
+		<java modulepath="${build}:${javafx}" jar="lib-test/junit-platform-console-standalone.jar" fork="true" failonerror="true">
+			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
+			<arg line="-cp build/chessdrills_test:build/chessdrills:${javafx}"/>
+			<arg line="--scan-classpath"/>
+			<arg line="--fail-if-no-tests" />
+			<arg line="--disable-banner" />
+			<arg line="--details=tree" />
+		</java>
+  </target>
 
-    For more details about JavaFX SDK Ant tasks go to
-    http://docs.oracle.com/javafx/2/deployment/jfxpub-deployment.htm
+	<target name="run">
+		<java modulepath="${build}:${javafx}" module="chessdrills/org.chessdrills.ChessDrills" fork="true">
+			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
+		</java>
+	</target>
 
-    For list of available properties check the files
-    nbproject/build-impl.xml and nbproject/jfx-impl.xml.
+	<target name="drun">
+		<java modulepath="${build}:${javafx}" module="chessdrills/org.chessdrills.ChessDrills" fork="true">
+			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
+		</java>
+	</target>
 
-    -->
+	<target name="brun" depends="build">
+		<java modulepath="${build}:${javafx}" classpath="${build}" module="chessdrills/org.chessdrills.ChessDrills" fork="true">
+			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
+		</java>
+	</target>
+
+	<target name="runjar">
+		<java modulepath="${dist}:${javafx}" module="chessdrills/org.chessdrills.ChessDrills" fork="true" />
+	</target>
+
+	<target name="deploylinux" depends="dist">
+		<echo message="Deploying to runtime_linux -- may require priviledge escalation." />
+		<delete dir="runtime_linux" />
+		<echo message="Executing deploy.sh"/>
+		<exec executable="/bin/bash">
+			<arg value="deploy.sh" />
+			<arg value="linux" />
+		</exec>
+	</target>
+
+	<target name="deploywindows" depends="dist">
+		<delete dir="runtime_windows -- may require priviledge escalation." />
+		<echo message="Deploying to runtime_windows" />
+		<echo message="Executing deploy.sh" />
+		<exec executable="/bin/bash">
+			<arg value="deploy.sh" />
+			<arg value="windows" />
+		</exec>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
 </project>
