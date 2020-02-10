@@ -18,6 +18,7 @@
 	-->
 
 	<property name="sdk-windows-jmods" value="windows_jdk_11/jdk-11.0.4+11/jmods"/>
+
 	<target name="init">
 		<tstamp/>
 		<mkdir dir="${build}" />
@@ -43,12 +44,10 @@
 		</jar>
 	</target>
 
-	<target name="testbuild">
+	<target name="testbuild" depends="build">
+		<mkdir dir="${build}"/>	
 		<javac destdir="build" modulesourcepath="${src_test}" modulepath="${build}/chessdrills:${javafx}:lib-test" includeantruntime="true" />
 	</target>	
-
-	<property name="testname" value="org.chessdrills_test.ChessDrillsTest"/>
-	<property name="logfile" value="test_log/TEST-${testname}.txt"/>
 
 	<target name="testconsole" depends="build,testbuild">
 		<java modulepath="${build}:${javafx}" jar="lib-test/junit-platform-console-standalone.jar" fork="true" failonerror="true">
@@ -62,12 +61,6 @@
   </target>
 
 	<target name="run">
-		<java modulepath="${build}:${javafx}" module="chessdrills/org.chessdrills.ChessDrills" fork="true">
-			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
-		</java>
-	</target>
-
-	<target name="drun">
 		<java modulepath="${build}:${javafx}" module="chessdrills/org.chessdrills.ChessDrills" fork="true">
 			<jvmarg value="--add-modules=javafx.controls,javafx.fxml,javafx.graphics"/>
 		</java>
