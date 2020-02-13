@@ -2,30 +2,30 @@
 ChessDrills is a suite of mini chess games designed to improve your chess. It currently features two games.
 
 
-# Invisible Pairs
+## Invisible Pairs
 
 The game is played by first adding a select number of piece randomly to the board. Only two pieces can be captured by one another. The game begins when the player, after memorizing the position, clicks the board to start the game. The pieces then become invisible except for one piece that moves to a location within capturable range of another piece (or visa versa). The player must click that "other" piece. The process repeats until all moves have been made. The game is over if the wrong square is clicked.
 
-# Quick Capture
+## Quick Capture
 
 A number of white pieces are placed randomly on the board within capture distance of at least one other piece -- with the exception of the last piece, which should not be attacked by any other white piece. Then, the dark piece (player piece) is placed on a random square attacking the last piece, and possibly others. The player then tries to find and capture that unprotected piece as quickly as possible, moving to the next round. The goal is to get through all of the rounds as fast as possible.
 
 # Run
 
-- Download `runtime_linux_x64.zip` for Linux or `runtime_windows_x64.zip` for Windows. 
-- Extract into a directory of your choice.
-- From the command line: cd into the base directory and run `./bin/chessdrills`.
-- From the desktop: open the folder **bin** and execute **chessdrills**
+1. Download `runtime_linux_x64.zip` for Linux or `runtime_windows_x64.zip` for Windows. 
+2. Extract into a directory of your choice.
+3. From the command line: cd into the base directory and run `./bin/chessdrills`.
+4. From the desktop: open the folder **bin** and execute **chessdrills**
 
 # Build
 
 The project can be build with Apache Ant on Linux.  
 
-Run `ant build` in the base directory to compile, and then `ant run` to start application from the classfiles.
-Run `ant dist` to build a jar file, type `ant runjar` to start from the jar. 
-Run `ant testbuild` to build the test classfiles, `ant testconsole` to execute the tests. See **Testing** below. 
-Run `ant deploylinux` to build a standalone Linux application. It will deploy to the **runtime_linux_x64** directory. See **Standalone Deployment** below.
-Run `ant deploywindows` to build a standalone Windows application. It will deploy to the **runtime_windows_x64** directory. See **Standalone Deployment** below.
+* Run `ant build` in the base directory to compile, and then `ant run` to start application from the classfiles.
+* Run `ant dist` to build a jar file, type `ant runjar` to start from the jar. 
+* Run `ant testbuild` to build the test classfiles, `ant testconsole` to execute the tests. See **Testing** below. 
+* Run `ant deploylinux` to build a standalone Linux application. It will deploy to the **runtime_linux_x64** directory. See **Standalone Deployment** below.
+* Run `ant deploywindows` to build a standalone Windows application. It will deploy to the **runtime_windows_x64** directory. See **Standalone Deployment** below.
 
 # Testing
 
