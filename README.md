@@ -1,12 +1,11 @@
 
-ChessDrills is a suite of mini chess games designed to improve your chess. It currently features two games.
+ChessDrills is a suite of mini chess games designed to improve your chess. It currently features two games. See [the site page]("https://heategn.github.com/heategn-workshop") for short gameplay videos.
 
-
-## Invisible Pairs
+### Invisible Pairs
 
 The game is played by first adding a select number of piece randomly to the board. Only two pieces can be captured by one another. The game begins when the player, after memorizing the position, clicks the board to start the game. The pieces then become invisible except for one piece that moves to a location within capturable range of another piece (or visa versa). The player must click that "other" piece. The process repeats until all moves have been made. The game is over if the wrong square is clicked.
 
-## Quick Capture
+### Quick Capture
 
 A number of white pieces are placed randomly on the board within capture distance of at least one other piece -- with the exception of the last piece, which should not be attacked by any other white piece. Then, the dark piece (player piece) is placed on a random square attacking the last piece, and possibly others. The player then tries to find and capture that unprotected piece as quickly as possible, moving to the next round. The goal is to get through all of the rounds as fast as possible.
 
