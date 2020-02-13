@@ -1,5 +1,5 @@
 
-ChessDrills is a suite of mini chess games designed to improve your chess. It currently features two games. See [the site page]("https://heategn.github.com/heategn-workshop") for short gameplay videos.
+ChessDrills is a suite of mini chess games designed to improve your chess. It currently features two games. See [the site page]("https://heategn.github.io/heategn-workshop") for short gameplay videos.
 
 ### Invisible Pairs
 
